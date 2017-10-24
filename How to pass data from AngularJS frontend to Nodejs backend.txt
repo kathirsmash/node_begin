@@ -1,0 +1,65 @@
+Index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="Scripts/angular.min.js"></script>
+   <script src="Scripts/app.js"></script>
+</head>
+<body ng-app="myApp">    
+  <div ng-controller="myCtrl">
+    <form>
+      Author:
+      <input type="text" ng-model="author">
+      <br>
+      <br> Title:
+      <input type="text" ng-model="title">
+      <br>
+      <br> Body:
+      <input type="author" ng-model="body">
+      <br>
+      <br>
+      <input type="submit" value="Submit" ng-click="submit()">
+    </form>
+  </div>
+</body>
+Angular code app.js
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+   $scope.submit= function(){
+      var data = $.param({
+        book: JSON.stringify({
+            author: $scope.author,
+            title : $scope.title,
+            body : $scope.body
+        })
+      });
+
+      $http.post("/api/book/", data).success(function(data, status) {
+        console.log('Data posted successfully');
+      })
+   }
+});
+server.js - Nodejs
+var express = require('express'); 
+var mysql = require('mysql');
+var app = express();
+
+var connection = mysql.createConnection({
+     host: 'localhost',
+     user: '',
+     password: '',
+     database: 'copedb'
+});
+connection.connect();
+
+app.post('/api/book', function(req, res, next){
+   var cope = req.body.params;
+   var query = connection.query('insert into cope set ?', cope, function(err, result) {
+     if (err) {
+       console.error(err);
+       return res.send(err);
+     } else {
+       return res.send('Ok');
+     }
+});
+app.listen(8080);

@@ -1,0 +1,6 @@
+1.SMTPConnection._formatError (node_modules\nodemailer\lib\smtp-connection\index.js:577:19
+2.SMTPConnection._actionAUTHComplete (node_modules\nodemailer\lib\smtp-connection\index.js:1306:34
+3.SMTPConnection._responseActions.push.str (node_modules\nodemailer\lib\smtp-connection\index.js:349:26)
+4.SMTPConnection._processResponse (node_modules\nodemailer\lib\smtp-connection\index.js:733:20)
+5.SMTPConnection._onData (node_modules\nodemailer\lib\smtp-connection\index.js:529:14)
+6.TLSSocket._socket.on.chunk (node_modules\nodemailer\lib\smtp-connection\index.js:481:47)
